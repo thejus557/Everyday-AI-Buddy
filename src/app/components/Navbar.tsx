@@ -22,7 +22,7 @@ const Navbar = () => {
         <div className="relative -mx-4 flex items-center justify-between">
           <div className="w-60 max-w-full px-4">
             <a href="/" className="block w-full py-5">
-              <div className="text-highlight">Everyday ai buddy</div>
+              <div className="text-highlight">Jarvis AI</div>
             </a>
           </div>
           <div className="flex w-full items-center justify-between px-4">
