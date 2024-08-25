@@ -43,7 +43,6 @@ const getAnswerFromGeminiAi = async (data: any, prompt: string) => {
     const result = await chat.sendMessage(prompt);
     return result.response.text();
   } catch (e) {
-    console.log(e);
     return e;
   }
 };
@@ -104,7 +103,6 @@ export const POST = async (req: Request) => {
 
     // Get AI response
     const result = await getAnswerFromGeminiAi([], prompt);
-    console.log("res", result);
     // Save the chat history
     const userChatHistory = new UserChatHistory({
       chatId,
@@ -169,7 +167,6 @@ export const POST = async (req: Request) => {
 };
 
 export const PUT = async (req: Request) => {
-  console.log("im called");
   try {
     const { userId, chatId, prompt } = await req.json();
 
@@ -190,13 +187,6 @@ export const PUT = async (req: Request) => {
       );
     }
 
-    console.log(
-      "userChatHistory.history",
-      userChatHistory.history.map((x: any) => ({
-        role: x.role,
-        parts: [x.parts],
-      }))
-    );
     // Get AI response
     const result = await getAnswerFromGeminiAi(
       userChatHistory.history.map((x: any) => ({

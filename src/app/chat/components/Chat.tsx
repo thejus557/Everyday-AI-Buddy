@@ -55,7 +55,6 @@ const Chat = () => {
       })
         .then((res) => res.json())
         .then((data: { data: Array<ChatBotResponse> }) => {
-          console.log("data", data.data[0]?.history);
           setChats(data.data[0]?.history);
           scrollToBottom();
         });
@@ -86,7 +85,6 @@ const Chat = () => {
   };
   const handleSendMessage = () => {
     if (message.trim() && textAreaRef.current) {
-      console.log("Message sent:", message);
       // Clear the text area after sending the message
       setMessage("");
       textAreaRef.current.style.height = "auto"; // Reset height after clearing

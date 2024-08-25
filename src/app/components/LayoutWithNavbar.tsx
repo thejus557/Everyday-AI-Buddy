@@ -67,7 +67,6 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
   };
 
   const handleNavigateToChatRoute = (e: any) => {
-    console.log("e", e);
     router.push(`/chat/${e.chatId}`);
   };
 
@@ -78,7 +77,6 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
       })
         .then((res) => res.json())
         .then((data: { data: any }) => {
-          console.log("data", data);
           // setCurrentChatId(data?.data[0]?._id);
           setRecent(groupByTime(data?.data[0]?.chats));
           setShouldRefetch(false);
@@ -143,24 +141,26 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
               </button>
             </div>
 
-            <div className="m-[22px] h-fill text-base">
-              <div className="overflow-y-auto h-full pb-4">
+            <div className="m-[22px] h-[calc(100dvh-74px)] text-base">
+              <div className="overflow-y-auto h-fill pb-4">
                 {recent &&
-                  Object?.keys(recent).map((ele) => (
+                  ["Today", "Yesterday", "Earlier"].map((ele) => (
                     <div className="group my-4" key={ele}>
-                      <div className="text-xs text-primary my-2 p-2">
-                        {" "}
-                        {ele}{" "}
-                      </div>
-                      {recent[ele].map((e: any) => (
-                        <div
-                          className="text-base text-primary my-2 p-2 hover:bg-slate-200 rounded-md text-ellipsis overflow-hidden text-nowrap"
-                          key={e.title}
-                          onClick={() => handleNavigateToChatRoute(e)}
-                        >
-                          {e.title}
+                      {recent[ele] && (
+                        <div className="text-xs text-primary my-2 p-2 font-bold">
+                          {ele}
                         </div>
-                      ))}
+                      )}
+                      {recent[ele] &&
+                        recent[ele].map((e: any) => (
+                          <div
+                            className="text-base text-slate-600 my-2 p-2 hover:bg-slate-200 rounded-md text-ellipsis overflow-hidden text-nowrap"
+                            key={e.title}
+                            onClick={() => handleNavigateToChatRoute(e)}
+                          >
+                            {e.title}
+                          </div>
+                        ))}
                     </div>
                   ))}
               </div>
