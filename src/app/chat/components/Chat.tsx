@@ -392,8 +392,7 @@ const Chat = () => {
                   {promptCards.map((e) => (
                     <div
                       onClick={() => {
-                        if (textAreaRef?.current)
-                          textAreaRef.current.value = e.prompt;
+                        setMessage(e.prompt);
                       }}
                       key={e.id}
                       className="flex flex-col border rounded-lg text-sm lg:text-base min-w-[140px] min-h-[120px] lg:min-w-[220px] lg:min-h-[120px] p-2 bg-secondary justify-between group hover:bg-blue-100"
