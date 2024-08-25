@@ -25,6 +25,11 @@ const config: Config = {
       borderColor: {
         highlight: "#1366ff",
       },
+      listStyleType: {
+        square: "square",
+      },
+
+      // reset all base
     },
   },
   plugins: [],

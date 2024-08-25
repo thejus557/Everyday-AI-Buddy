@@ -1,10 +1,190 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   --foreground: #8c98a4;
 }
+
+@tailwind base;
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body,
+  nav {
+    color: var(--foreground-primary);
+    margin: 0;
+    padding: 0;
+  }
+
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box; /* 1 */
+    border-width: 0; /* 2 */
+    border-style: solid; /* 2 */
+    border-color: theme("borderColor.DEFAULT", currentColor); /* 2 */
+  }
+
+  ::before,
+  ::after {
+    --tw-content: "";
+  }
+
+  p {
+    margin: 4px 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: normal;
+    color: #111;
+    line-height: 1em;
+  }
+  h4,
+  h5,
+  h6 {
+    font-weight: bold;
+  }
+  h1 {
+    font-size: 2.5em;
+  }
+  h2 {
+    font-size: 2em;
+  }
+  h3 {
+    font-size: 1.5em;
+  }
+  h4 {
+    font-size: 1.2em;
+  }
+  h5 {
+    font-size: 1em;
+  }
+  h6 {
+    font-size: 0.9em;
+  }
+
+  blockquote {
+    color: #666666;
+    margin: 0;
+    padding-left: 3em;
+    border-left: 0.5em #eee solid;
+  }
+  hr {
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #eee;
+    margin: 1em 0;
+    padding: 0;
+  }
+  pre,
+  code,
+  kbd,
+  samp {
+    color: #000;
+    font-size: 0.98em;
+  }
+  pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  b,
+  strong {
+    font-weight: bold;
+  }
+
+  dfn {
+    font-style: italic;
+  }
+
+  ins {
+    background: #ff9;
+    color: #000;
+    text-decoration: none;
+  }
+
+  mark {
+    background: #ff0;
+    color: #000;
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sup {
+    top: -0.5em;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ul,
+  ol {
+    margin: 1em 0;
+    padding: 0 0 0 2em;
+  }
+  li p:last-child {
+    margin: 0;
+  }
+  dd {
+    margin: 0 0 0 2em;
+  }
+
+  img {
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+    vertical-align: middle;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #1e2022;
+  }
+  th {
+    border: 1px solid #1e2022;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f8fafd;
+    border: 1px solid #1e2022;
+  }
+
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f8fafd;
+  }
+
+  td {
+    vertical-align: top;
+    border: 1px solid #1e2022;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
 
 /* @media (prefers-color-scheme: dark) {
   :root {
@@ -35,4 +215,16 @@ body {
 
 .w-fit {
   width: -webkit-fill-available;
+}
+
+.h-fill {
+  height: -webkit-fill-available;
+}
+
+.no-tailwind * {
+  /* // all: initial !important; */
+}
+
+.markdown * {
+  margin-bottom: 1rem;
 }

@@ -7,12 +7,12 @@ const userChats = new mongoose.Schema(
       type: String,
       required: true,
     },
-    chatId: {
-      type: String,
-      required: true,
-    },
     chats: [
       {
+        chatId: {
+          type: String,
+          required: true,
+        },
         title: {
           type: String,
           required: true,

@@ -18,12 +18,14 @@ const userChatHistory = new mongoose.Schema(
           enum: ["user", "model"],
           required: true,
         },
-        parts: {
-          text: {
-            type: String,
-            required: true,
+        parts: [
+          {
+            text: {
+              type: String,
+              required: true,
+            },
           },
-        },
+        ],
       },
     ],
   },

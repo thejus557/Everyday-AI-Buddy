@@ -9,7 +9,6 @@ import { v4 as uuidv4 } from "uuid";
 import UserChats from "../../models/user-chats.schema";
 import UserChatHistory from "../../../app/models/chat-history.schema";
 import mongoose from "mongoose";
-import { useId } from "react";
 
 const safetySettings = [
   {
@@ -113,15 +112,19 @@ export const POST = async (req: Request) => {
       history: [
         {
           role: "user",
-          parts: {
-            text: prompt,
-          },
+          parts: [
+            {
+              text: prompt,
+            },
+          ],
         },
         {
           role: "model",
-          parts: {
-            text: result,
-          },
+          parts: [
+            {
+              text: result,
+            },
+          ],
         },
       ],
     });
@@ -132,17 +135,18 @@ export const POST = async (req: Request) => {
     let userChats = await UserChats.findOne({ userId });
     if (!userChats) {
       userChats = new UserChats({
-        chatId,
         userId,
         chats: [
           {
-            title: prompt.substring(0, 20),
+            title: prompt.substring(0, 100),
+            chatId,
           },
         ],
       });
     } else {
       userChats.chats.push({
-        title: prompt.substring(0, 20),
+        title: prompt.substring(0, 100),
+        chatId,
       });
     }
 
@@ -186,22 +190,39 @@ export const PUT = async (req: Request) => {
       );
     }
 
+    console.log(
+      "userChatHistory.history",
+      userChatHistory.history.map((x: any) => ({
+        role: x.role,
+        parts: [x.parts],
+      }))
+    );
     // Get AI response
-    const result = await getAnswerFromGeminiAi(userChatHistory.history, prompt);
+    const result = await getAnswerFromGeminiAi(
+      userChatHistory.history.map((x: any) => ({
+        role: x.role,
+        parts: x.parts.map((e: any) => ({ text: e.text })),
+      })),
+      prompt
+    );
 
     // Update the chat history
     userChatHistory.history.push(
       {
         role: "user",
-        parts: {
-          text: prompt,
-        },
+        parts: [
+          {
+            text: prompt,
+          },
+        ],
       },
       {
         role: "model",
-        parts: {
-          text: result,
-        },
+        parts: [
+          {
+            text: result,
+          },
+        ],
       }
     );
 

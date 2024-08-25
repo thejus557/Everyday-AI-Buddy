@@ -3,17 +3,24 @@
 import { shouldRefetchRecentChats } from "@/app/state";
 import { useSession } from "@clerk/nextjs";
 import { useAtom } from "jotai";
-import { selectAtom } from "jotai/utils";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+// import "katex/dist/katex.min.css";
 
 type chatHistoryType = {
   role: "user" | "model";
-  parts: {
-    text: string;
-  };
+  parts: [
+    {
+      text: string;
+    }
+  ];
 };
 
 type ChatBotResponse = {
@@ -23,6 +30,7 @@ type ChatBotResponse = {
 };
 
 const Chat = () => {
+  const chatRef = useRef<any>();
   const router = useRouter();
   const params = useParams();
   const { chatId } = params; // Extract the id from the URL
@@ -33,6 +41,13 @@ const Chat = () => {
   const { session } = useSession();
 
   const [_, setShouldRefetech] = useAtom(shouldRefetchRecentChats);
+
+  const scrollToBottom = () => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  };
+
   useEffect(() => {
     if (chatId && session?.user.id) {
       fetch(`/api/chatbot?userId=${session?.user.id}&chatId=${chatId}`, {
@@ -42,6 +57,7 @@ const Chat = () => {
         .then((data: { data: Array<ChatBotResponse> }) => {
           console.log("data", data.data[0]?.history);
           setChats(data.data[0]?.history);
+          scrollToBottom();
         });
     }
   }, [session]);
@@ -59,6 +75,15 @@ const Chat = () => {
     }
   };
 
+  const handleOnSuccess = (data: any) => {
+    setChats(data.data?.history);
+
+    if (!chatId) {
+      router.push(`/chat/${data.data.chatId}`);
+      setShouldRefetech(true);
+      scrollToBottom();
+    }
+  };
   const handleSendMessage = () => {
     if (message.trim() && textAreaRef.current) {
       console.log("Message sent:", message);
@@ -70,31 +95,45 @@ const Chat = () => {
         ...prev,
         {
           role: "user",
-          parts: {
-            text: message,
-          },
+          parts: [
+            {
+              text: message,
+            },
+          ],
         },
         {
           role: "model",
-          parts: {
-            text: "loading...",
-          },
+          parts: [
+            {
+              text: "loading...",
+            },
+          ],
         },
       ]);
 
-      fetch("/api/chatbot", {
-        method: "POST",
-        body: JSON.stringify({ prompt: message, userId: session?.user.id }),
-      })
-        .then((res) => res.json())
-        .then((data: { data: ChatBotResponse }) => {
-          setChats(data.data?.history);
-
-          if (!chatId) {
-            router.push(`/chat/${data.data.chatId}`);
-            setShouldRefetech(true);
-          }
-        });
+      if (!chatId) {
+        fetch("/api/chatbot", {
+          method: "POST",
+          body: JSON.stringify({ prompt: message, userId: session?.user.id }),
+        })
+          .then((res) => res.json())
+          .then((data: { data: ChatBotResponse }) => {
+            handleOnSuccess(data);
+          });
+      } else {
+        fetch("/api/chatbot", {
+          method: "PUT",
+          body: JSON.stringify({
+            prompt: message,
+            userId: session?.user.id,
+            chatId,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data: { data: ChatBotResponse }) => {
+            handleOnSuccess(data);
+          });
+      }
     }
   };
 
@@ -102,11 +141,14 @@ const Chat = () => {
     <div className="flex w-full justify-center bg-white">
       <div className="container justify-center items-center shadow-none">
         <div className="flex flex-col items-center justify-start bg-gray-100 h-[calc(100dvh-64px)]">
-          <div className="w-full p-4 bg-white  flex flex-col justify-between h-full overflow-y-auto">
+          <div
+            className="w-full p-4 bg-white  flex flex-col justify-between h-full overflow-y-auto"
+            ref={chatRef}
+          >
             {chats &&
               chats?.map((ele) => (
                 <div
-                  key={ele.parts.text}
+                  key={ele.parts[0]?.text}
                   className="flex flex-col justify-end mb-4"
                 >
                   {ele.role === "model" && (
@@ -120,16 +162,47 @@ const Chat = () => {
                         className=""
                         src="/Graident Ai Robot.jpg"
                       />
-                      <div className="text-sm text-gray-800 bg-gray-100 p-2 rounded-lg max-w-xs">
-                        <Markdown>{ele.parts.text}</Markdown>
+                      <div className="text-sm p-2 rounded-lg max-w-xs markdown">
+                        <Markdown
+                          className="text-primary"
+                          remarkPlugins={[remarkGfm, remarkMath]}
+                          rehypePlugins={[rehypeKatex]}
+                          components={{
+                            code(props) {
+                              const { children, className, node, ...rest } =
+                                props;
+                              const match = /language-(\w+)/.exec(
+                                className || ""
+                              );
+                              return match ? (
+                                <SyntaxHighlighter
+                                  {...rest}
+                                  PreTag="div"
+                                  // eslint-disable-next-line react/no-children-prop
+                                  children={String(children).replace(/\n$/, "")}
+                                  language={match[1]}
+                                  style={materialLight}
+                                />
+                              ) : (
+                                <code {...rest} className={className}>
+                                  {children}
+                                </code>
+                              );
+                            },
+                          }}
+                          // eslint-disable-next-line react/no-children-prop
+                          children={ele.parts[0]?.text}
+                        />
                       </div>
                     </div>
                   )}
 
                   {ele.role === "user" && (
                     <div className="flex items-start justify-end mb-2">
-                      <div className="text-sm text-white bg-primary p-2 rounded-lg max-w-xs">
-                        <Markdown>{ele.parts.text}</Markdown>
+                      <div className="text-sm text-primary bg-gray-100 p-2 rounded-lg max-w-xs">
+                        <Markdown remarkPlugins={[remarkGfm]}>
+                          {ele.parts[0]?.text}
+                        </Markdown>
                       </div>
                     </div>
                   )}
@@ -141,7 +214,7 @@ const Chat = () => {
           <div className="relative w-full flex-grow p-2 border rounded-lg pr-[34px] items-end">
             <textarea
               placeholder="Type something here"
-              className="w- fulflex-grow p-2 border rounded-lg  focus:outline-none border-none w-full resize-none"
+              className="w- fulflex-grow p-2 border rounded-lg  focus:outline-none border-none w-full resize-none text-primary"
               onChange={(e) => setMessage(e.target.value)}
               onKeyUp={handleKeyUp}
               value={message}
