@@ -30,6 +30,7 @@ const config: Config = {
       },
 
       // reset all base
+      container: {},
     },
   },
   plugins: [],
