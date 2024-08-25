@@ -91,11 +91,13 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-row h-full relative">
       <aside
-        className={`z-50 absolute lg:relative h-full bg-slate-50 side-nav transition-transform duration-500 transform ${
+        className={`z-50 absolute lg:relative h-full bg-slate-50 side-nav transition-transform duration-500 ease-in-out transform ${
           isSignedIn && open
-            ? "translate-x-0 w-1/2 lg:w-1/4"
-            : "-translate-x-full w-0 lg:w-0"
+            ? "translate-x-0 lg:w-1/4 w-1/2"
+            : "-translate-x-full lg:w-0 w-0"
         }
+        
+
           `}
       >
         {isSignedIn && open && (

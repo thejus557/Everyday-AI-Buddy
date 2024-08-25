@@ -229,8 +229,9 @@ const Chat = () => {
       setShouldRefetech(true);
     }
   };
-  const handleSendMessage = () => {
-    if (message.trim() && textAreaRef.current) {
+  const handleSendMessage = (prompt?: string) => {
+    let query = prompt || message;
+    if (query.trim() && textAreaRef.current) {
       // Clear the text area after sending the message
       setMessage("");
       textAreaRef.current.style.height = "auto"; // Reset height after clearing
@@ -241,7 +242,7 @@ const Chat = () => {
           role: "user",
           parts: [
             {
-              text: message,
+              text: query,
             },
           ],
         },
@@ -260,7 +261,7 @@ const Chat = () => {
       if (!chatId) {
         fetch("/api/chatbot", {
           method: "POST",
-          body: JSON.stringify({ prompt: message, userId: session?.user.id }),
+          body: JSON.stringify({ prompt: query, userId: session?.user.id }),
         })
           .then((res) => res.json())
           .then((data: { data: ChatBotResponse }) => {
@@ -273,7 +274,7 @@ const Chat = () => {
         fetch("/api/chatbot", {
           method: "PUT",
           body: JSON.stringify({
-            prompt: message,
+            prompt: query,
             userId: session?.user.id,
             chatId,
           }),
@@ -293,7 +294,7 @@ const Chat = () => {
     <div className="flex w-full justify-center bg-white">
       <div
         className={`container justify-center items-center shadow-none  ${
-          chats.length || chatId
+          chats?.length || chatId
             ? "justify-between"
             : "justify-start lg:max-w-fit"
         }`}
@@ -301,7 +302,7 @@ const Chat = () => {
         <div className="flex flex-col items-center justify-start bg-gray-100 h-[calc(100dvh-64px)]">
           <div
             className={`w-full p-4 bg-white  flex flex-col h-full overflow-y-auto ${
-              chats.length || chatId ? "justify-between" : "justify-start"
+              chats?.length || chatId ? "justify-between" : "justify-start"
             }`}
             ref={chatRef}
           >
@@ -393,9 +394,10 @@ const Chat = () => {
                     <div
                       onClick={() => {
                         setMessage(e.prompt);
+                        handleSendMessage();
                       }}
                       key={e.id}
-                      className="flex flex-col border rounded-lg text-sm lg:text-base min-w-[140px] min-h-[120px] lg:min-w-[220px] lg:min-h-[120px] p-2 bg-secondary justify-between group hover:bg-blue-100"
+                      className="cursor-pointer flex flex-col border rounded-lg text-sm lg:text-base min-w-[140px] min-h-[120px] lg:min-w-[220px] lg:min-h-[120px] p-2 bg-secondary justify-between group hover:bg-blue-100"
                     >
                       <div className="text-black">{e.title}</div>
                       <div className="flex justify-end rounded-full text-highlight text-right group-hover:text-black">
@@ -421,7 +423,7 @@ const Chat = () => {
             />
             <button
               className="ml-2 text-blue-600 hover:text-blue-800 absolute right-2 bottom-[20px]"
-              onClick={handleSendMessage}
+              onClick={() => handleSendMessage()}
               disabled={isFetching}
             >
               <svg
