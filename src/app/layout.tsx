@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   title: "NexGen.AI",
   description: "Your Intelligent Companion for Smarter Conversations.",
   authors: "Surya teja",
-  role: "Senior Frontend Developer"
 };
 
 export default function RootLayout({
