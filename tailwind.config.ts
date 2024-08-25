@@ -17,8 +17,10 @@ const config: Config = {
       backgroundColor: {
         primary: "#1366ff",
         secondary: "#f8fafd",
+      },
+      backgroundImage: {
         "primary-gradient":
-          "linear-gradient(121.7deg, #2974FA 22.9%, #43D4FF 69%)",
+          "linear-gradient(90deg, rgba(28,23,108,1) 0%, #1366ff 35%, rgba(0,212,255,1) 97%)",
       },
       borderColor: {
         highlight: "#1366ff",

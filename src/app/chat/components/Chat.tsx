@@ -1,6 +1,9 @@
 "use client";
 
+import { shouldRefetchRecentChats } from "@/app/state";
 import { useSession } from "@clerk/nextjs";
+import { useAtom } from "jotai";
+import { selectAtom } from "jotai/utils";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
@@ -29,6 +32,7 @@ const Chat = () => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const { session } = useSession();
 
+  const [_, setShouldRefetech] = useAtom(shouldRefetchRecentChats);
   useEffect(() => {
     if (chatId && session?.user.id) {
       fetch(`/api/chatbot?userId=${session?.user.id}&chatId=${chatId}`, {
@@ -88,6 +92,7 @@ const Chat = () => {
 
           if (!chatId) {
             router.push(`/chat/${data.data.chatId}`);
+            setShouldRefetech(true);
           }
         });
     }

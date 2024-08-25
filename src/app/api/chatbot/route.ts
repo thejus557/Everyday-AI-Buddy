@@ -62,13 +62,9 @@ export const GET = async (req: NextRequest) => {
       await mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URI as string);
     }
 
-    // Retrieve the chat history
-    const chat = await UserChatHistory.find({});
-    console.log("chat", chat);
-
     const userChatHistory = await UserChatHistory.find({
-      userId: "user_2l68ShvTz7d6WCowPAQRRhwjhRl",
-      chatId: "137f411c-93fd-4152-ac71-f72656dabdf2",
+      userId,
+      chatId,
     });
 
     if (!userChatHistory) {
@@ -133,7 +129,7 @@ export const POST = async (req: Request) => {
     await userChatHistory.save();
 
     // Check if user chats exist, if not create new
-    let userChats = await UserChats.findOne({ userId, chatId });
+    let userChats = await UserChats.findOne({ userId });
     if (!userChats) {
       userChats = new UserChats({
         chatId,

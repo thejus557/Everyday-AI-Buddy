@@ -18,7 +18,7 @@ export default function Home() {
   }, [isSignedIn, router, session]);
 
   return (
-    <main className="flex min-h-[calc(100dvh-64px)] flex-col items-center justify-center bg-primary-gradient">
+    <main className="flex min-h-[calc(100dvh-64px)] flex-col items-center justify-center">
       <Content />
     </main>
   );

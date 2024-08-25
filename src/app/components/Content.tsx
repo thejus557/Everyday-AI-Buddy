@@ -14,14 +14,25 @@ const Content = () => {
   };
 
   return (
-    <div className="container grid grid-cols-1 md:grid-cols-2 justify-evenly items-center w-full">
-      <div className="grid md:order-none order-2 justify-center items-center h-fit">
-        <div className="grid text-center md:text-left items-center text-4xl md:text-6xl lg:text-8xl font-bold text-highlight my-2">
-          Jarvis AI
+    <div className="container grid grid-cols-1 md:grid-cols-2 justify-evenly items-center w-full mb-16">
+      <div className="grid md:order-none order-2 justify-center items-center h-fit m-2">
+        <div className="grid text-center md:text-left items-center text-4xl md:text-6xl lg:text-8xl my-2 text-transparent bg-clip-text bg-primary-gradient">
+          NexGen.AI
         </div>
-        <div className="grid text-center md:text-left items-center text-base md:text-xl lg:text-2xl my-2">
-          Your Intelligent Partner for Daily Tasks, Insights, and Creativity.
+        <div className="grid text-primary text-center md:text-left items-center text-base md:text-xl lg:text-2xl my-2">
+          Your Intelligent Companion for Smarter Conversations.
         </div>
+        <div className="grid text-center md:text-left items-center text-xs md:text-base my-2">
+          NexGen.AI is your next-generation virtual assistant, designed to
+          engage in natural, intuitive conversations and provide insightful
+          responses. Leveraging cutting-edge generative AI technology, Nex Gen
+          AI offers accurate information, helpful advice, and personalized
+          interactions to enhance your daily tasks and decision-making
+          processes. Whether you need assistance with research, creative
+          brainstorming, or just a friendly chat, Nex Gen AI is here to make
+          your life easier and more productive.
+        </div>
+
         <Button
           className="m-auto md:m-0"
           title="Get Started"
