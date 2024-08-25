@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "NexGen.AI",
   description: "Your Intelligent Companion for Smarter Conversations.",
-  author: "Surya teja"
+  author: "Surya teja",
   role: "Senior Frontend Developer"
 };
 
