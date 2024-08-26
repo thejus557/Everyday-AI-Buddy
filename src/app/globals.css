@@ -223,3 +223,20 @@ body {
 .markdown * {
   margin-bottom: 1rem;
 }
+
+/* .side-nav.open {
+  width: 100%;
+  transition: width 1s;
+}
+
+@media screen and (min-width: 1020px) {
+  .side-nav.open {
+    width: 25%;
+    transition: width 1;
+  }
+}
+
+.side-nav.close {
+  width: 0;
+  transition: width 1s;
+} */
