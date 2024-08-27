@@ -4,7 +4,7 @@ import { shouldRefetchRecentChats } from "@/app/state";
 import { useSession } from "@clerk/nextjs";
 import { useAtom } from "jotai";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -171,7 +171,11 @@ const Chat = () => {
   const chatRef = useRef<any>();
   const router = useRouter();
   const params = useParams();
-  const { chatId } = params; // Extract the id from the URL
+  // const { chatId } = params; // Extract the id from the URL
+  const searchParams = useSearchParams();
+  const sparams = new URLSearchParams(searchParams.toString());
+
+  const chatId = sparams.get("chatId");
 
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState<Array<chatHistoryType>>([]);
@@ -225,7 +229,11 @@ const Chat = () => {
     setChats(data.data?.history);
 
     if (!chatId) {
-      router.push(`/chat/${data.data.chatId}`);
+      router.push(`/chat?chatId=${data.data?.chatId}`, { scroll: false });
+      // router.
+      // router.push(`/chat/`, {
+      //   query: { chatId: data.data?.chatId },
+      // });
       setShouldRefetech(true);
     }
   };
