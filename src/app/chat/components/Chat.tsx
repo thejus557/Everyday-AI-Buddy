@@ -331,7 +331,7 @@ const Chat = () => {
                         className=""
                         src="/Graident Ai Robot.jpg"
                       />
-                      <div className="text-sm p-2 rounded-lg max-w-xs markdown">
+                      <div className="text-sm p-2 rounded-lg max-w-full markdown">
                         {ele.parts[0].text === "loading..." && isFetching ? (
                           <Loader />
                         ) : (
@@ -374,7 +374,7 @@ const Chat = () => {
 
                   {ele.role === "user" && (
                     <div className="flex items-start justify-end mb-2">
-                      <div className="text-sm text-primary bg-gray-100 p-2 rounded-lg max-w-xs">
+                      <div className="text-sm text-primary bg-gray-100 p-2 rounded-lg max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
                         <Markdown remarkPlugins={[remarkGfm]}>
                           {ele.parts[0]?.text}
                         </Markdown>
