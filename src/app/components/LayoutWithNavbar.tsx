@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "@clerk/nextjs";
 import Navbar from "./Navbar";
 import { useParams, useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 type DataItem = {
   title: string;
@@ -68,7 +69,8 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
 
   const handleNavigateToChatRoute = (e: any) => {
     setOpen(false);
-    router.push(`/chat/${e.chatId}`);
+    router.push(`/chat?chatId=${e.chatId}`);
+    setShouldRefetch(true);
   };
 
   const fetchUserChats = async () => {
@@ -81,7 +83,8 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
           // setCurrentChatId(data?.data[0]?._id);
           setRecent(groupByTime(data?.data[0]?.chats));
           setShouldRefetch(false);
-        });
+        })
+        .catch((err) => toast.error("Error fetching chat history"));
     }
   };
 

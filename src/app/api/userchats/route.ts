@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import UserChats from "../../models/user-chats.schema";
-import UserChatHistory from "../../models/chat-history.schema";
+import UserChats from "../models/user-chats.schema";
+import UserChatHistory from "../models/chat-history.schema";
 import mongoose from "mongoose";
 
 export const GET = async (req: NextRequest) => {

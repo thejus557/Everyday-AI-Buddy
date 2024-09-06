@@ -6,8 +6,8 @@ import {
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
-import UserChats from "../../models/user-chats.schema";
-import UserChatHistory from "../../../app/models/chat-history.schema";
+import UserChats from "../models/user-chats.schema";
+import UserChatHistory from "../models/chat-history.schema";
 import mongoose from "mongoose";
 
 const safetySettings = [
