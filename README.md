@@ -1,40 +1,88 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NexGen.AI Application
 
-## Getting Started
+An interactive AI chat application built with Next.js and TypeScript, powered by Google's Gemini AI API.
 
-First, run the development server:
+## Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Check out the live demo of NexGen.AI: [https://nex-gen-ai.vercel.app](https://nex-gen-ai.vercel.app)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Experience the power of AI-driven conversations and explore the features of our application in real-time.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Next.js 14
+- TypeScript
+- React
+- Tailwind CSS
+- PostCSS
+- Google Gemini AI API
+- Clerk Authentication
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+- AI-powered chat interface using Google's Gemini AI
+- User authentication with Clerk (sign-up and sign-in functionality)
+- Responsive design with a custom navbar
+- Server-side rendering and API routes with Next.js
+- Animated AI avatar using Lottie
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Prerequisites
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Node.js (version 14 or later)
+- npm or yarn
+- Google Cloud account with Gemini AI API access
+- Clerk account for authentication
 
-## Deploy on Vercel
+## Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Clone the repository:
+   ```
+   git clone https://github.com/thejus557/NexGen.AI
+   cd NexGen.AI
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. Install dependencies:
+   ```
+   npm install
+   # or
+   pnpm install
+   ```
 
-## check live preview
+3. Set up environment variables:
+   Create a `.env` file in the root directory and add the following variables:
+   ```
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+   NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL=/chat
+   NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL=/chat
+   NEXT_PUBLIC_GEMINI_AI_API_KEY=your_google_gemini_api_key
+   NEXT_PUBLIC_MONGO_URI=your_mongo_uri
+   ```
 
-https://nex-gen-ai.vercel.app/chat
+## Running the Application
+
+1. Start the development server:
+   ```
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+2. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Building for Production
+
+## Deployment
+
+This project is configured for easy deployment on Vercel. Push to your GitHub repository and connect it to Vercel for automatic deployments.
+
+Deplyment url: https://nex-gen-ai.vercel.app
+
+## Project Structure
+
+- `src/app/(pages)`: Contains the main pages (chat, sign-in, sign-up)
+- `src/app/components`: Reusable components like Navbar and LayoutWithNavbar
+- `src/middleware.ts`: Clerk authentication middleware
+- `public`: Static assets including SVGs and animations

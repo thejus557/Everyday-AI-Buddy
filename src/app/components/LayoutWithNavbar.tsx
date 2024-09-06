@@ -97,7 +97,7 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
       <aside
         className={`z-50 absolute w-0 lg:relative h-full bg-slate-50 side-nav   ${
           open
-            ? "w-full md:w-1/2 lg:w-1/4 transision-[width] duration-1000"
+            ? "w-full md:w-[30%] lg:w-[20%] transision-[width] duration-1000"
             : "close w-0 transision-[width] duration-1000"
         }
         `}
@@ -164,6 +164,7 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
                           className="text-base text-slate-600 my-2 p-2 hover:bg-slate-200 rounded-md text-ellipsis overflow-hidden text-nowrap"
                           key={e.title}
                           onClick={() => handleNavigateToChatRoute(e)}
+                          title={e.title}
                         >
                           {e.title}
                         </div>
