@@ -1,4 +1,3 @@
-import { timeStamp } from "console";
 import * as mongoose from "mongoose";
 
 const userChatHistory = new mongoose.Schema(

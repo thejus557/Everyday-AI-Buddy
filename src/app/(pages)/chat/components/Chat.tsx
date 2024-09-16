@@ -53,7 +53,6 @@ const Chat = () => {
 
   const scrollToBottom = () => {
     if (chatRef.current) {
-      console.log("chat ref", chatRef.current.scrollHeight);
       chatRef.current.scrollTo({
         top: chatRef.current.scrollHeight,
         behavior: "smooth",
