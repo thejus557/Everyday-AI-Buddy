@@ -2,10 +2,10 @@
 
 import { useAtom, useAtomValue } from "jotai";
 import { isNavbarOpened, shouldRefetchRecentChats } from "../state";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSession } from "@clerk/nextjs";
 import Navbar from "./Navbar";
-import { useParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 type DataItem = {
@@ -53,7 +53,10 @@ function groupByTime(data: DataItem[]): GroupedData {
 
 const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const params = useParams();
+
+  const searchParams = useSearchParams();
+
+  const chatId = searchParams.get("chatId");
 
   const { session } = useSession();
 
@@ -73,7 +76,7 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
     setShouldRefetch(true);
   };
 
-  const fetchUserChats = async () => {
+  const fetchUserChats = useCallback(async () => {
     if (session?.user.id) {
       fetch(`/api/userchats?userId=${session?.user.id}`, {
         method: "GET",
@@ -86,11 +89,11 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
         })
         .catch((err) => toast.error("Error fetching chat history"));
     }
-  };
+  }, [session?.user.id]);
 
   useEffect(() => {
     fetchUserChats();
-  }, [session?.user.id, params.chatId, shouldRefetch]);
+  }, [session?.user.id, chatId, shouldRefetch, fetchUserChats]);
 
   return (
     <div className="flex flex-row h-full relative">
@@ -161,7 +164,9 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
                     {recent[ele] &&
                       recent[ele].map((e: any) => (
                         <div
-                          className="text-base text-slate-600 my-2 p-2 hover:bg-slate-200 rounded-md text-ellipsis overflow-hidden text-nowrap"
+                          className={`text-base text-slate-600 my-2 p-2 hover:bg-slate-200 rounded-md text-ellipsis overflow-hidden text-nowrap ${
+                            e.chatId === chatId ? "bg-slate-200" : ""
+                          }`}
                           key={e.title}
                           onClick={() => handleNavigateToChatRoute(e)}
                           title={e.title}

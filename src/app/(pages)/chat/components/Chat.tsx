@@ -177,11 +177,9 @@ const Chat = () => {
             : "justify-start lg:max-w-fit"
         }`}
       >
-        <div className="flex flex-col items-center justify-start bg-gray-100 h-[calc(100dvh-64px)]">
+        <div className="flex flex-col items-center justify-start bg-gray-100 h-[calc(100dvh-64px)] bg-white">
           <div
-            className={`w-full p-4 bg-white  flex flex-col h-full overflow-y-auto ${
-              chats?.length || chatId ? "justify-between" : "justify-start"
-            }`}
+            className={`w-full p-4 bg-white  flex flex-col h-full overflow-y-auto justify-start`}
             ref={chatRef}
           >
             {chats &&
@@ -256,11 +254,11 @@ const Chat = () => {
 
             {chats.length === 0 && !chatId && (
               <div className="my-12">
-                <div className="text-transparent bg-clip-text font-bold bg-primary-gradient text-3xl md:text-5xl lg:text-6xl mb-2">
-                  Hello, {session?.user.fullName?.toLowerCase()}.
+                <div className="text-transparent bg-clip-text font-semibold bg-primary-gradient text-3xl md:text-5xl lg:text-6xl mb-2">
+                  Hello, {session?.user.firstName?.toLowerCase()}
                 </div>
                 <div className="text-2xl md:text-4xl lg:text-5xl">
-                  How can i help you today ?
+                  How can I help you today ?
                 </div>
               </div>
             )}
@@ -275,7 +273,7 @@ const Chat = () => {
                         handleSendMessage(e.prompt);
                       }}
                       key={e.id}
-                      className="cursor-pointer flex flex-col border rounded-lg text-sm lg:text-base min-w-[140px] min-h-[120px] lg:min-w-[220px] lg:min-h-[120px] p-4 bg-secondary justify-between group hover:bg-blue-50"
+                      className="cursor-pointer flex flex-col border rounded-lg text-sm lg:text-base w-[140px] min-h-[160px] lg:w-[180px] lg:min-h-[160px] p-4 bg-secondary justify-between group hover:bg-blue-50"
                     >
                       <div className="text-black">{e.title}</div>
                       <div className="flex justify-end rounded-full text-highlight text-right group-hover:text-black">
@@ -287,38 +285,43 @@ const Chat = () => {
               </div>
             )}
           </div>
-          <div className="relative w-full flex-grow p-2 border pr-[34px] items-end">
+          <div className="flex relative w-full flex-grow p-3 border rounded-xl pr-[34px] items-end bg-slate-100 border-none">
             <textarea
               disabled={isFetching}
               placeholder="Type something here"
-              className="flex-grow p-2 border  focus:outline-none border-none w-full resize-none text-primary"
+              className="flex-grow p-2 rounded-xl focus:outline-none border-none w-full resize-none text-primary text-base bg-slate-100"
               onChange={(e) => setMessage(e.target.value)}
               onKeyUp={handleKeyUp}
               value={message}
               ref={textAreaRef}
               rows={1} // Default to single row
-              style={{ maxHeight: "240px", overflowY: "auto" }} // Limit height to 240px
+              style={{
+                maxHeight: "240px",
+                overflowY: "auto",
+              }} // Limit height to 240px
             />
-            <button
-              className="ml-2 text-blue-600 hover:text-blue-800 absolute right-2 bottom-[20px]"
-              onClick={() => handleSendMessage()}
-              disabled={isFetching}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="h-6 w-6"
+            {message.length > 0 && (
+              <button
+                className="ml-2 text-blue-600 hover:text-blue-800 absolute right-2 bottom-[20px]"
+                onClick={() => handleSendMessage()}
+                disabled={isFetching}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
-                />
-              </svg>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="h-6 w-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+                  />
+                </svg>
+              </button>
+            )}
           </div>
         </div>
       </div>
