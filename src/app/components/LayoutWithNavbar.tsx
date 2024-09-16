@@ -97,8 +97,8 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
       <aside
         className={`z-50 absolute w-0 lg:relative h-full bg-slate-50 side-nav   ${
           open
-            ? "w-full md:w-[30%] lg:w-[20%] transision-[width] duration-1000"
-            : "close w-0 transision-[width] duration-1000"
+            ? "w-full md:w-[30%] lg:w-[20%] transision-[width] duration-500"
+            : "close w-0 transision-[width] duration-500"
         }
         `}
       >

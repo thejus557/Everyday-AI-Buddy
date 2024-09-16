@@ -23,6 +23,7 @@
     border-width: 0; /* 2 */
     border-style: solid; /* 2 */
     border-color: theme("borderColor.DEFAULT", currentColor); /* 2 */
+    text-decoration: none;
   }
 
   ::before,

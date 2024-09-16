@@ -49,8 +49,8 @@ const Navbar = () => {
               </div>
             </a>
           </div>
-          <div className="flex w-full items-center justify-between px-4">
-            <div>
+          <div className="flex w-full items-center justify-end px-4">
+            {/* <div>
               <button
                 onClick={() => setOpen(!open)}
                 id="navbarToggler"
@@ -62,18 +62,18 @@ const Navbar = () => {
                 <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color "></span>
                 <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color "></span>
               </button>
-            </div>
-            <div className="justify-end flex lg:pr-0">
+            </div> */}
+            <div className="justify-end flex lg:pr-0 gap-4">
               <SignedOut>
                 <a
                   href="/sign-in"
-                  className="p-2 text-base font-medium text-dark hover:text-primary "
+                  className="py-2 px-4 text-base font-medium text-dark border rounded-lg hover:text-white hover:bg-primary !no-underline border-highlight text-highlight"
                 >
-                  Sign in
+                  Sign In
                 </a>
                 <a
                   href="/sign-up"
-                  className="rounded-md bg-primary p-2 text-base font-medium text-white hover:bg-primary/90"
+                  className="py-2 px-4 text-base font-medium border rounded-lg text-white bg-primary hover:bg-primary/90 !no-underline border-highlight"
                 >
                   Sign Up
                 </a>
