@@ -89,7 +89,7 @@ const LayoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
         })
         .catch((err) => toast.error("Error fetching chat history"));
     }
-  }, [session?.user.id]);
+  }, [session?.user.id, setRecent, setShouldRefetch]);
 
   useEffect(() => {
     fetchUserChats();

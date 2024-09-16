@@ -78,7 +78,7 @@ const Chat = () => {
       setChats([]);
       router.push("/chat");
     }
-  }, [session, chatId]);
+  }, [session, chatId, router]);
 
   const handleKeyUp = (e: any) => {
     if (textAreaRef.current) {

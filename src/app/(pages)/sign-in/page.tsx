@@ -1,10 +1,10 @@
 "use client";
 
-import { SignIn, SignUp } from "@clerk/nextjs";
+import { SignIn } from "@clerk/nextjs";
 import React, { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const p = useSearchParams();
   const router = useRouter();
 
@@ -12,7 +12,7 @@ const page = () => {
     if (p.get("redirect_url")?.includes("/chat")) {
       router.push("/");
     }
-  }, [p]);
+  }, [p, router]);
 
   return (
     <div className="flex justify-center items-center h-full">
@@ -21,4 +21,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
