@@ -22,17 +22,11 @@ const Content = () => {
         <div className="grid text-primary text-center md:text-left items-center text-base md:text-xl lg:text-2xl my-2">
           Your Intelligent Companion for Smarter Conversations.
         </div>
-        <div className="grid text-center md:text-left items-center text-xs md:text-base my-2">
-          NexGen.AI is your next-generation virtual assistant, designed to
-          engage in natural, intuitive conversations and provide insightful
-          responses. Leveraging cutting-edge generative AI technology, Nex Gen
-          AI offers accurate information, helpful advice, and personalized
-          interactions to enhance your daily tasks and decision-making
-          processes. <br /> <br /> Whether you need assistance with research,
-          creative brainstorming, or just a friendly chat, Nex Gen AI is here to
-          make your life easier and more productive.
+        <div className="grid text-justify md:text-left items-center text-xs md:text-base my-2 text-gray-600">
+        NexGen.AI is a next-generation virtual assistant, built to engage in natural, intuitive conversations while offering insightful responses. Powered by cutting-edge generative AI technology, it delivers accurate information, helpful advice, and personalized interactions tailored to enhance your daily tasks and decision-making.
+        <br /><br />
+        Whether you're looking for research assistance, creative brainstorming, or just a friendly chat, NexGen.AI is designed to make your life easier and more productive, helping you navigate through tasks with efficiency and ease.
         </div>
-
         <Button
           className="w-fit mt-4"
           title="Get Started"
