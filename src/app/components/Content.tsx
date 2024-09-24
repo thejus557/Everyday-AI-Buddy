@@ -25,7 +25,7 @@ const Content = () => {
         <div className="grid text-justify md:text-left items-center text-xs md:text-base my-2 text-gray-600">
         NexGen.AI is a next-generation virtual assistant, built to engage in natural, intuitive conversations while offering insightful responses. Powered by cutting-edge generative AI technology, it delivers accurate information, helpful advice, and personalized interactions tailored to enhance your daily tasks and decision-making.
         <br /><br />
-        Whether you're looking for research assistance, creative brainstorming, or just a friendly chat, NexGen.AI is designed to make your life easier and more productive, helping you navigate through tasks with efficiency and ease.
+        Whether you&apos;re looking for research assistance, creative brainstorming, or just a friendly chat, NexGen.AI is designed to make your life easier and more productive, helping you navigate through tasks with efficiency and ease.
         </div>
         <Button
           className="w-fit mt-4"
