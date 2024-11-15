@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NexGen.AI",
+  title: "NexChat.AI",
   description: "Your Intelligent Companion for Smarter Conversations.",
 };
 

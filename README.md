@@ -1,10 +1,10 @@
-# NexGen.AI Application
+# NexChat.AI Application
 
 An interactive AI chat application built with Next.js and TypeScript, powered by Google's Gemini AI API.
 
 ## Live Demo
 
-Check out the live demo of NexGen.AI: [https://nex-gen-ai.vercel.app](https://nex-gen-ai.vercel.app)
+Check out the live demo of NexChat.AI: [https://nex-chat-ai.vercel.app](https://nex-chat-ai.vercel.app)
 
 Experience the power of AI-driven conversations and explore the features of our application in real-time.
 
@@ -37,8 +37,8 @@ Experience the power of AI-driven conversations and explore the features of our 
 
 1. Clone the repository:
    ```
-   git clone https://github.com/thejus557/NexGen.AI
-   cd NexGen.AI
+   git clone https://github.com/thejus557/NexChat.AI
+   cd NexChat.AI
    ```
 
 2. Install dependencies:
@@ -78,7 +78,7 @@ Experience the power of AI-driven conversations and explore the features of our 
 
 This project is configured for easy deployment on Vercel. Push to your GitHub repository and connect it to Vercel for automatic deployments.
 
-Deplyment url: https://nex-gen-ai.vercel.app
+Deplyment url: https://nex-chat-ai.vercel.app
 
 ## Project Structure
 

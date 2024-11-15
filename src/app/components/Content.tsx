@@ -17,15 +17,23 @@ const Content = () => {
     <div className="container grid grid-cols-1 md:grid-cols-2 justify-evenly items-center w-full mb-16">
       <div className="grid md:order-none order-2 justify-center items-center h-fit m-2">
         <div className="font-semibold grid text-center md:text-left items-center text-4xl md:text-6xl lg:text-8xl my-2 text-transparent bg-clip-text bg-primary-gradient">
-          NexGen.AI
+          NexChat.AI
         </div>
         <div className="grid text-primary text-center md:text-left items-center text-base md:text-xl lg:text-2xl my-2">
           Your Intelligent Companion for Smarter Conversations.
         </div>
         <div className="grid text-justify md:text-left items-center text-xs md:text-base my-2 text-gray-600">
-        NexGen.AI is a next-generation virtual assistant, built to engage in natural, intuitive conversations while offering insightful responses. Powered by cutting-edge generative AI technology, it delivers accurate information, helpful advice, and personalized interactions tailored to enhance your daily tasks and decision-making.
-        <br /><br />
-        Whether you&apos;re looking for research assistance, creative brainstorming, or just a friendly chat, NexGen.AI is designed to make your life easier and more productive, helping you navigate through tasks with efficiency and ease.
+          NexChat.AI is a next-generation virtual assistant, built to engage in
+          natural, intuitive conversations while offering insightful responses.
+          Powered by cutting-edge generative AI technology, it delivers accurate
+          information, helpful advice, and personalized interactions tailored to
+          enhance your daily tasks and decision-making.
+          <br />
+          <br />
+          Whether you&apos;re looking for research assistance, creative
+          brainstorming, or just a friendly chat, NexChat.AI is designed to make
+          your life easier and more productive, helping you navigate through
+          tasks with efficiency and ease.
         </div>
         <Button
           className="w-fit mt-4"

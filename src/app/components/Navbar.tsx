@@ -45,7 +45,7 @@ const Navbar = () => {
             )}
             <a href="/" className="block w-full py-5">
               <div className="text-transparent bg-clip-text font-bold bg-primary-gradient">
-                NexGen.AI
+                NexChat.AI
               </div>
             </a>
           </div>
